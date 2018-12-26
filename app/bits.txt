@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-3 ">
+          <h1 class="my-4">My Profile</h1>
+           <div class="list-group ">
+                <a href="{{url_for('provider_profile', username=current_user.name)}}" class="list-group-item list-group-item-action">Home</a>
+                <a href="{{url_for('provider_info', username=current_user.name)}}" class="list-group-item list-group-item-action">Edit Personal Info</a>
+                <a href="{{url_for('provider_password', username=current_user.name)}}" class="list-group-item list-group-item-action active">Change Password</a>
+              </div> 
+      </div>
+      <div class="col-md-9">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <h4>Change Password</h4>
+                          <hr>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <form method="POST" role="form">
+                          <div class="form-group row">
+                            <label for="name" class="col-4 col-form-label">Password</label>
+                            {% if message == 'Incorrect password!' %}
+                              <label for="name" class="col-4 col-form-label"> {{message}}</label> 
+                            {% endif %}
+                            <div class="col-8">
+                                <input name="pass" placeholder="Enter Password" class="form-control here" type="password">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="name" class="col-4 col-form-label">New Password</label>
+                            {% if message == 'Please enter new password!' or message == 'Passwords do not match!' %}
+                              <label for="name" class="col-4 col-form-label"> {{message}}</label> 
+                            {% endif %}
+                            <div class="col-8">
+                              <input name="new_pass_1" placeholder="New Password" class="form-control here" type="password">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            <label for="name" class="col-4 col-form-label">Confirm Password</label> 
+                            <div class="col-8">
+                              <input name="new_pass_2" placeholder="Confirm New Password" class="form-control here" type="password">
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                            {% if message == 'Password Updated!'%}
+                              <div>{{message}}</div>
+                            {% endif %}
+                            <div class="offset-4 col-8">
+                                <button name="submit" type="submit" class="btn btn-primary">Update Password</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>

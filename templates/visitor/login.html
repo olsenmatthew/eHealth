@@ -1,0 +1,42 @@
+{% extends 'visitor/_header.html' %} 
+{% block head %} <title>Login</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">
+    <li><a href="{{url_for('index')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{url_for('register')}}">Register</a></li>
+  <li class="active"><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+
+<h1>Login to your account</h1>
+<h2><small>Please enter your details</small></h2>
+<p>&nbsp;</p>
+    <form method="POST" role="form">
+        {% if error=='email' or error=='password' %}
+        <div>
+            <p>
+                Incorrect username or password!
+            </p>
+        </div>
+        {% endif %}
+        <div>
+            <input name="email" type="email" class="form-control" placeholder="Email Address">
+        </div>
+        <p>&nbsp;</p>
+
+        <div>
+            <input name="password" type="password" class="form-control" placeholder="Password">
+        </div>
+        <p>&nbsp;</p>
+
+        <div><input type="submit" value="Login" class="btn"></div>
+        <p>&nbsp;</p>
+
+        <div><a href="{{ url_for('register') }}">Don't have an account? Register here</a></div>
+    </form>
+</div>
+{% endblock %}

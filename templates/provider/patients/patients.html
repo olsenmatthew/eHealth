@@ -1,0 +1,50 @@
+{% extends 'provider/_header.html' %} 
+{% block head %} <title>Edit My Info</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('provider_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('provider_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('provider_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('provider_patients', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Patients</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-3 ">
+          <h1 class="my-4">Patients</h1>
+      </div>
+
+      <div class="col-lg-9">
+          <div class="card mt-4">
+            <div class="card-body">
+              <hr>
+            </div>
+					</div>
+						{% for i in patients %}
+							<div class="row">							
+								<div class="col-lg-3">
+									<b>Patient: </b>{{i.name}} {{i.surname}}
+								</div>
+								<div class="col-lg-3">
+									<b>Email: </b>{{i.email}}
+								</div>
+								<div class="col-lg-3">
+										<b>Phone: </b>{{i.phone}}
+									</div>
+								<div class="col-lg-3">
+									<a href="{{url_for('provider_patient_profile', username=current_user.userID, patient=i, patient_id=i.userID)}}" class="btn btn-primary">View Profile</a>
+								</div>
+							</div>
+							<hr>
+						{% endfor %}           
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body>

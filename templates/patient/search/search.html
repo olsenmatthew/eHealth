@@ -1,0 +1,48 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Search</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.id)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.id)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.id)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('patient_search_centre', username=current_user.id)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-md-3 ">
+          <h1 class="my-4">Search By ...</h1>
+           <div class="list-group ">
+                <a href="{{url_for('patient_search_centre', username=current_user.first_name)}}" class="list-group-item list-group-item-action">Centre</a>
+                <a href="{{url_for('patient_search_location', username=current_user.first_name)}}" class="list-group-item list-group-item-action">Location</a>
+                <a href="{{url_for('patient_search_service', username=current_user.first_name)}}" class="list-group-item list-group-item-action">Service</a>
+                <a href="{{url_for('patient_search_provider', username=current_user.first_name)}}" class="list-group-item list-group-item-action">Provider</a>
+              </div> 
+      </div>
+      <div class="col-md-9">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <h4>Search By ...</h4>
+                          <hr>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body>
+
+</header>

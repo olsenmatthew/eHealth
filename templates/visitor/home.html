@@ -1,0 +1,27 @@
+{% extends 'visitor/_header.html' %} 
+{% block head %} <title>Home</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">
+    <li class="active"><a href="{{url_for('index')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{url_for('register')}}">Register</a></li>
+  <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+{% endblock %}
+{% block body %}
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+  <div class="jumbotron text-center">
+      <h1>Welcome To E-Health</h1>
+  </div>
+</div>
+<div class="col-sm-2"></div>
+{% endblock %}
+</body>
+
+
+
+
+
+

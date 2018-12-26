@@ -1,0 +1,63 @@
+{% extends 'provider/_header.html' %} 
+{% block head %} <title>My Profile</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('provider_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li class="active"><a href="{{url_for('provider_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('provider_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li><a href="{{url_for('provider_patients', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Patients</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+			<div class="col-sm-3">
+				<h1 class="my-4">{{current_user.name}} {{current_user.surname}}</h1>
+			</div>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	<div class="row">
+	</div>
+	<div class="row">
+		<div class="col-sm-2"></div>
+		<div class="col-sm-8">
+				<div class="col-sm-3">
+					<br>
+					<div class="list-group ">
+							<div class="list-group ">
+									<a href="{{url_for('provider_profile', username=current_user.name)}}" class="list-group-item list-group-item-action active">Personal Info</a>
+									<a href="{{url_for('provider_info', username=current_user.name)}}" class="list-group-item list-group-item-action">Edit Personal Info</a>
+									<a href="{{url_for('provider_password', username=current_user.name)}}" class="list-group-item list-group-item-action">Change Password</a>
+							</div> 
+					</div> 
+				</div>
+				<div class="col-sm-9">
+					<div class="row">
+						<div class="col-lg-4">
+							<h4><b>First Name:</b> {{current_user.name}}</h4> 
+							<br>
+							<h4><b>Last Name:</b> {{current_user.surname}}</h4>
+							<br>
+							<h4><b>Profession:</b> {{current_user.profession}} </h4>
+						</div>
+						<div class="col-lg-8">
+							<h4><b>Phone Number:</b> {{current_user.phone}}</h4> 
+							<br>
+							<h4><b>Email Address:</b> {{current_user.email}}</h4>
+							<br>
+							<h4><b>Provider Number:</b> {{current_user.providerNo}}</h4> 
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="col-sm-2"></div>
+	</div>
+	
+	
+{% endblock %}
+</body>

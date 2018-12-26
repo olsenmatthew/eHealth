@@ -1,0 +1,62 @@
+{% extends 'provider/_header.html' %} 
+{% block head %} <title>Edit My Info</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('provider_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('provider_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('provider_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('provider_patients', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Patients</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="col-sm-3">
+            <h1 class="my-4">Patient: {{patient.name}} {{patient.surname}}</h1>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+<div class="row">
+</div>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+            <div class="col-sm-3">
+                <br>
+                <div class="list-group ">
+                        <div class="list-group ">
+                                <a href="{{url_for('provider_patient_profile', username=current_user.name, patient_id=patient.userID)}}" class="list-group-item list-group-item-action">Patient Info</a>
+                                <a href="{{url_for('provider_patient_notes', username=current_user.name, patient_id=patient.userID)}}" class="list-group-item list-group-item-action">Past Session Notes</a>
+                                <a href="{{url_for('provider_patient_new_note', username=current_user.name, patient_id=patient.userID)}}" class="list-group-item list-group-item-action active">Add Notes</a>
+                                <a href="{{url_for('provider_patients', username=current_user.name)}}" class="list-group-item list-group-item-action">Back to Patients</a>                       
+                        </div> 
+                </div> 
+            </div>
+            <div class="col-sm-6">
+									<div class="row">
+											<form method='POST' role='form'>
+													<div class="form-group">
+															<label for="exampleFormControlTextarea1"><h3><b>Record New Note:</b></h3></label>
+															<textarea name = "body" class="form-control input-lg" rows="10"></textarea>
+															<br>
+															<button name="submit" type="submit" class="btn btn-primary">Save</button>
+													</div>
+											</form>
+											{% if message == "saved" %}
+											<h4>Note Saved!</h4>
+											{% endif %}
+									</div>
+            </div>
+            <div class="col-sm-3"></div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+{% endblock %}
+</body>
+
+

@@ -1,0 +1,134 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Provider Profile</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+           <div class="list-group top top-gap" style="padding-top:25px">
+                <a href="{{url_for('patient_provider_profile', username=current_user.name, provider_id=provider.userID)}}" class="list-group-item list-group-item-action">Back to Provider</a>
+            </div> 
+			</div>
+			<div class="col-lg-1"></div>
+		
+    <div class="col-lg-9">
+        <div class="card my-4">
+          <div class="row">
+            <div class="card-body">
+							<h1 class="my-4">Book with {{provider.name}} at {{centre.name}}</h1>
+							<hr>
+							<div class="row">
+                  <form method="POST" role="form">
+											<div class="form-group col-lg-4">
+												<label for="date" class="col-4 col-form-label"><h4><b>Select Date</b></h4></label> 
+												<div class="col-8">
+													<input name="date" class="form-control here" type="date">
+												</div>
+											</div>
+											<div class="form-group col-lg-4">
+													<label for="time" class="col-4 col-form-label"><h4><b>Select Time</b></h4></label> 
+													<select class="form-control" name="time">
+															{% for i in time_slots %}
+															<option>{{i}}</option>
+															{% endfor %}
+													</select>
+											</div>
+											<div class="form-group col-sm-4" style="padding-top:25px ">
+													<br>
+													<button name="submit" type="submit" class="btn btn-primary">Confirm Booking</button>
+											</div>
+									</form>
+							</div>
+							<hr>
+							<h3 class="card-title">Provider Info</h3>
+							<div class="container">
+									<div class="col-lg-6">        
+										<table class="table table-striped">
+											<tbody>
+											<tr>
+												<td>Name</td>
+												<td>{{provider.name}} {{provider.surname}}</td>
+											</tr>
+											<tr>
+												<td>Email</td>
+												<td>{{provider.email}}</td>
+											</tr>
+											<tr>
+												<td>Phone</td>
+												<td>{{provider.phone}}</td>
+											</tr>
+											<tr>
+												<td>Rating</td>
+												<td>
+													{% if provider.get_rating() == [] %}
+														No Ratings
+													{% else %}
+														{{provider.get_rating()}}
+													{% endif %}
+												</td>
+											</tr>
+											<tr>
+												<td>Type</td>
+												<td>{{provider.profession}}</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+							</div>
+							<hr>
+							<h3 class="card-title">Centre Info</h3>
+							<div class="container">
+									<div class="col-lg-6">        
+										<table class="table table-striped">
+											<tbody>
+											<tr>
+												<td>ABN</td>
+												<td>{{centre.abn}}</td>
+											</tr>
+											<tr>
+												<td>Name</td>
+												<td>{{centre.name}}</td>
+											</tr>
+											<tr>
+												<td>Suburb</td>
+												<td>{{centre.location}}</td>
+											</tr>
+											<tr>
+												<td>Phone</td>
+												<td>{{centre.phone}}</td>
+											</tr>
+											<tr>
+												<td>Rating</td>
+												<td>
+														{% if centre.get_rating() == [] %}
+															No Ratings
+														{% else %}
+															{{centre.get_rating()}}
+														{% endif %}
+												</td>
+											</tr>
+											<tr>
+												<td>Type</td>
+												<td>{{centre._type}}</td>
+											</tr>
+											</tbody>
+										</table>
+									</div>
+							</div>
+        </div>
+      </div>
+  </div>
+{% endblock %}
+</body>
+
+</header>

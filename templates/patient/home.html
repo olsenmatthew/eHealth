@@ -1,0 +1,24 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Home</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li class="active"><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+  <div class="jumbotron text-center">
+      <h1>Welcome To E-Health</h1>
+  </div>
+</div>
+<div class="col-sm-2"></div>
+{% endblock %}
+</body>
+

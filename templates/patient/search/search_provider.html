@@ -1,0 +1,79 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Search Providers</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+      <div class="col-sm-3">
+        <h1 class="my-4">Search By ...</h1>
+      </div>
+      <form method="POST" role="form" style="padding-top:25px">
+        <div class="col-sm-4">
+          <input name="search" class="form-control form-inline" type="text" placeholder="Provider Name" aria-label="Search">								
+        </div>
+        <div class="col-sm-2">	
+          <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+        </div>
+      </form>
+      <div class="col-sm-3"></div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+  <div class="row">
+    <br>
+  </div>
+  <div class="row">
+    <div class="col-sm-2"></div>	
+    <div class="col-sm-8">
+      <div class="col-sm-3">
+          <div class="list-group ">
+              <a href="{{url_for('patient_search_centre', username=current_user.name)}}" class="list-group-item list-group-item-action">Centre</a>
+              <a href="{{url_for('patient_search_location', username=current_user.name)}}" class="list-group-item list-group-item-action">Location</a>
+              <a href="{{url_for('patient_search_service', username=current_user.name)}}" class="list-group-item list-group-item-action">Service</a>
+              <a href="{{url_for('patient_search_provider', username=current_user.name)}}" class="list-group-item list-group-item-action active">Provider</a>
+          </div> 
+      </div>
+      <div class="col-sm-9">
+        {% if error != None %}
+        <h4>Cannot find any providers matching '{{error}}'</h4>
+        {% endif %}
+        {% for i in providers %}
+          <div class="row">							
+            <div class="col-lg-3">
+              <b>Provider: </b>{{i.name}} {{i.surname}}
+            </div>
+            <div class="col-lg-3">
+              <b>Service: </b>{{i.profession}}
+            </div>
+            <div class="col-lg-3">
+                {% if i.get_rating() == [] %}
+                  <b>Rating: </b>No Rating
+                {% else %}
+                  <b>Rating: </b>{{i.get_rating()}}
+                {% endif %}
+              </div>
+            <div class="col-lg-2">
+              <a href="{{url_for('patient_provider_profile', username=current_user.userID, provider_id=i.userID)}}" class="btn btn-primary">View Provider Profile</a>
+            </div>
+          </div>
+          <hr>
+        {% endfor %}  
+      </div>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+{% endblock %}
+</body>
+<!-- 
+ -->

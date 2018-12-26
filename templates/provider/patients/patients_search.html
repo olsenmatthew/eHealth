@@ -1,0 +1,48 @@
+{% extends 'provider/_header.html' %} 
+{% block head %} <title>Edit My Info</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('provider_home', username=current_user.id)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('provider_profile', username=current_user.id)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('provider_appointments', username=current_user.id)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('provider_patients', username=current_user.id)}}"><span class="glyphicon glyphicon-list"></span> Patients</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-3 ">
+          <h1 class="my-4">Patients</h1>
+          <div class="list-group">
+            <a href="{{url_for('provider_patients', username=current_user.id)}}" class="list-group-item list-group-item-action">All Patients</a>
+            <a href="{{url_for('provider_search_patients', username=current_user.id)}}" class="list-group-item list-group-item-action active">Search Patients</a>
+        </div>
+      </div>
+
+      <div class="col-lg-9">
+        <div class="card mt-4">
+          <div class="card-body">
+            <h3 class="card-title">Search Patients</h3>
+				<hr>
+            <form method="POST" role="form">
+              <div class="col-lg-6">
+                <input name="patient" class="form-control" type="text" placeholder="Patient Name" aria-label="Search">
+              </div>
+              <div class="col-lg-3">
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+              </div>
+            </form>
+				
+            <div class="row">
+            	<div class="col-md-12">
+               </div>
+            </div>          
+         </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body>

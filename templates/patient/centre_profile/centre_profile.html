@@ -1,0 +1,108 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Centre Profile</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-2 ">
+           <div class="list-group top top-gap" style="padding-top:25px">
+                <a href="{{url_for('patient_search_centre', username=current_user.name)}}" class="list-group-item list-group-item-action">Back to Search</a>
+            </div> 
+      </div>
+      <div class="col-sm-1"></div>
+		
+      <div class="col-lg-9">
+          <div class="card my-4">
+            <div class="row">
+                <h1 class="my-4">{{centre.name}}</h1>
+                <hr>
+            <div class="card-body">
+            <div class="container">
+                <div class="col-lg-6">        
+                  <table class="table table-striped">
+                    <tbody>
+                    <tr>
+                      <td>ABN</td>
+                      <td>{{centre.abn}}</td>
+                    </tr>
+                    <tr>
+                      <td>Name</td>
+                      <td>{{centre.name}}</td>
+                    </tr>
+                    <tr>
+                      <td>Suburb</td>
+                      <td>{{centre.location}}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone</td>
+                      <td>{{centre.phone}}</td>
+                    </tr>
+                    <tr>
+                      <td>Rating</td>
+                      <td>
+                          {% if centre.get_rating() == [] %}
+                            No Ratings
+                          {% else %}
+                            {{centre.get_rating()}}
+                          {% endif %}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Type</td>
+                      <td>{{centre._type}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+            <hr>
+                  <h3 class="card-title">Rate Centre</h3>
+                  {% if error == 'invalid rating' %}
+                    <h5>Rating not between 0-5</h5>
+                  {% endif %}
+                  <form method="POST" role="form">
+                    <div class="col-lg-6">
+                      <input name="rating" class="form-control" type="number" placeholder="Rate Centre (out of 5)" aria-label="Search">
+                    </div>
+                    <div >
+                      <button type="submit" class="btn btn-primary">Rate</button>
+                    </div>
+            </form>
+                  <hr>
+            <h3 class="card-title">Services</h3>
+            <hr>
+                {% if services == [] %}
+                <h4>No Services</h4>
+                {% else %}
+                  {% for i in services %}
+                    <div class="row">							
+                      <div class="col-lg-4">
+                        <b>Service: </b>{{i}}
+                      </div>
+                      <div class="col-lg-2">
+                        <a href="{{url_for('patient_centre_services', username=current_user.name,centre_id=centre.centreID, service=i)}}" class="btn btn-primary">Veiw {{i}}'s</a>
+                      </div>
+                    </div>
+                    <hr>
+                  {% endfor %} 
+                {% endif %}
+              </div>        
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+</body>
+
+</header>

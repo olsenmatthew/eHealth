@@ -1,0 +1,6 @@
+env/
+app/__pycache__
+app/modules/__pycache__
+app/modules/level_0/__pycache__
+app/modules/level_1/__pycache__
+.__pycache__

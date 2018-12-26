@@ -1,0 +1,20 @@
+{% include 'patient/_head.html' %}
+
+<body>
+	<nav class="navbar navbar-inverse navbar-sticky-top">
+		<div class="container-fluid">
+			<div class="col-sm-2"></div>
+			<div class="col-sm-8">
+				<nav class="navbar-header"> 
+					<a class="navbar-brand" href="{{url_for('patient_home', username=current_user.userID)}}">E-Health</a>
+				</nav>
+			<div class="collapse navbar-collapse">
+				{% block links %} {% endblock %}
+			</div> 
+			</div>
+			<div class="col-sm-2"></div>
+		</div>
+	</nav>
+
+	{% block body %} {% endblock %}
+</body>

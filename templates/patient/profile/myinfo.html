@@ -1,0 +1,136 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Edit My Info</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li class="active"><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="col-sm-3">
+      <h1 class="my-4">{{current_user.name}} {{current_user.surname}}</h1>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="col-sm-3">
+      <br>
+      <div class="list-group ">
+          <a href="{{url_for('patient_profile', username=current_user.name)}}" class="list-group-item list-group-item-action">Personal Info</a>
+          <a href="{{url_for('patient_info', username=current_user.name)}}" class="list-group-item list-group-item-action active">Edit Personal Info</a>
+          <a href="{{url_for('patient_password', username=current_user.name)}}" class="list-group-item list-group-item-action">Change Password</a>
+      </div> 
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <form method='POST' role='form'>
+          <div class="form-group col-sm-4">
+              <label for="username" class="col-4 col-form-label"><h4><b>First Name</b></h4></label> 
+              <div class="col-8">
+                <input name="name" placeholder="{{current_user.name}}" class="form-control here" type="text">
+              </div>
+              <br>
+              <label for="username" class="col-4 col-form-label"><h4><b>Last Name</b></h4></label> 
+              <div class="col-8">
+                <input name="surname" placeholder="{{current_user.surname}}" class="form-control here" type="text">
+              </div>
+          </div>
+          <div class="form-group col-sm-4">
+              <label for="username" class="col-4 col-form-label"><h4><b>Phone Number</b></h4></label> 
+              <div class="col-8">
+                <input name="phone_num" placeholder="{{current_user.phone}}" class="form-control here" type="number">
+              </div>
+              <br>
+              {% if error == "user exists" %}
+                <h4>User with that email already exists!</h4>
+              {% endif %}
+              <label for="username" class="col-4 col-form-label"><h4><b>Email</b></h4></label> 
+              <div class="col-8">
+                <input name="email" placeholder="{{current_user.email}}" class="form-control here" type="email">
+              </div>
+              <br>
+              <label for="username" class="col-4 col-form-label"><h4><b>Medicare Number</b></h4></label> 
+              <div class="col-8">
+                <input name="medicare_num" placeholder="{{current_user.medicareNo}}" class="form-control here" type="number">
+              </div>
+          </div>
+          <div class="form-group col-sm-8">
+            <br>
+            <button name="submit" type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+</body>
+
+<!-- <div class="container">
+    <div class="row">
+      <div class="col-md-3 ">
+          <h1 class="my-4">My Profile</h1>
+
+      </div>
+      <div class="col-md-9">
+          <div class="card">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <h4>Edit Personal Info</h4>
+                          <hr>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <form method="POST" role="form">
+                              <div class="form-group row">
+                                  <label for="username" class="col-4 col-form-label">First Name</label> 
+                                  <div class="col-8">
+                                    <input name="name" placeholder="{{current_user.first_name}}" class="form-control here" type="text">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="name" class="col-4 col-form-label">Last Name</label> 
+                                  <div class="col-8">
+                                    <input name="surname" placeholder="{{current_user.surname}}" class="form-control here" type="text">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label for="text" class="col-4 col-form-label">Phone Number</label> 
+                                  <div class="col-8">
+                                    <input name="phone_num" placeholder="{{current_user.phone_number}}" class="form-control here" type="number">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lastname" class="col-4 col-form-label">Medicare Number</label> 
+                                    <div class="col-8">
+                                      <input name="medicare_num" placeholder="{{current_user.medicare_number}}" class="form-control here" type="number">
+                                    </div>
+                                  </div>
+                                <div class="form-group row">
+                                  <div class="offset-4 col-8">
+                                    <button name="submit" type="submit" class="btn btn-primary">Update My Profile</button>
+                                  </div>
+                                </div>
+                          </form>
+                      </div>
+                  </div>
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+  </div> -->

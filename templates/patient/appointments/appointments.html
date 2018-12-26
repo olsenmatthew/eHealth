@@ -1,0 +1,63 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>My Appointments</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li class="active"><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="col-sm-2"></div>
+<div class="col-sm-8">
+  <div class="col-sm-3">
+    <h1 class="my-4">Appointments</h1>
+  </div>
+  <div class="col-sm-9">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="card mt-4">
+              <div class="card-body">
+                <hr>
+              </div>
+            </div>
+              {% if appointments == [] %}
+              <h4>No Appointments</h4>
+              {% else %}
+                {% for app in appointments %}
+                  <div class="row">							
+                    <div class="col-lg-3">
+                      <b>Provider: </b>{{app.provider.name}} {{app.provider.surname}}
+                    </div>
+                    <div class="col-lg-5">
+                      <b>Date and Time: </b>{{app.date_time}}
+                    </div>
+                    <div class="col-lg-2">
+                      <a href="{{url_for('patient_provider_profile', username=current_user.userID, provider=app.provider, provider_id=app.provider.userID)}}" class="btn btn-primary">View Profile</a>
+                    </div>
+                    <div class="col-lg-1">
+                        <a href="{{url_for('patient_appointments', username=current_user.userID, delete=app.appointmentID)}}" class="btn btn-primary">Cancel</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <b>Centre: </b>{{app.centre.name}}
+                    </div>
+                    <div class="col-lg-4">
+                        <b>Location: </b>{{app.centre.location}}
+                    </div>
+                  </div>
+                  <hr>
+                {% endfor %}   
+              {% endif %}        
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+</body>

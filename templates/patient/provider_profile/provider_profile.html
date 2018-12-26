@@ -1,0 +1,107 @@
+{% extends 'patient/_header.html' %} 
+{% block head %} <title>Provider Profile</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">				
+    <li><a href="{{url_for('patient_home', username=current_user.userID)}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+    <li><a href="{{url_for('patient_profile', username=current_user.userID)}}"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+    <li><a href="{{url_for('patient_appointments', username=current_user.userID)}}"><span class="glyphicon glyphicon-list"></span> Appointments</a></li>
+    <li class="active"><a href="{{url_for('patient_search_centre', username=current_user.userID)}}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{{url_for('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+  </ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-2">
+           <div class="list-group top top-gap" style="padding-top:25px">
+                <a href="{{url_for('patient_search_provider', username=current_user.name)}}" class="list-group-item list-group-item-action">Back to Search</a>
+            </div> 
+      </div>
+      <div class="col-lg-1"></div>
+		
+    <div class="col-lg-9">
+        <div class="card my-4">
+          <div class="row">
+            <div class="card-body">
+                <h1 class="my-4">{{provider.name}} {{provider.surname}}</h1>
+                <hr>
+					 <div class="container">
+							<div class="col-lg-6">        
+								<table class="table table-striped">
+								  <tbody>
+									 <tr>
+										<td>Name</td>
+										<td>{{provider.name}} {{provider.surname}}</td>
+									 </tr>
+									 <tr>
+										<td>Email</td>
+										<td>{{provider.email}}</td>
+									 </tr>
+									 <tr>
+										<td>Phone</td>
+										<td>{{provider.phone}}</td>
+									 </tr>
+									 <tr>
+										<td>Rating</td>
+										<td>
+                      {% if provider.get_rating() == [] %}
+                        No Ratings
+                      {% else %}
+                        {{provider.get_rating()}}
+                      {% endif %}
+                    </td>
+									 </tr>
+									 <tr>
+										<td>Type</td>
+										<td>{{provider.profession}}</td>
+									 </tr>
+								  </tbody>
+								</table>
+							</div>
+					</div>
+					 <hr>
+                <h3 class="card-title">Rate {{provider.name}} {{provider.surname}}</h3>
+                {% if error == 'invalid rating' %}
+                  <h5>Rating not between 0-5</h5>
+                {% endif %}
+                <form method="POST" role="form">
+                  <div class="col-lg-6">
+                      <input name="rating" class="form-control" type="number" placeholder="Rate {{provider.name}} {{provider.surname}} (out of 5)" aria-label="Search">
+                  </div>
+                  <div >
+                    <button type="submit" class="btn btn-primary">Rate</button>
+                  </div>
+					      </form>
+                <hr>
+					 <h3 class="card-title">Provider Centres</h3>
+					 <hr>
+                {% for i in centres %}
+                  <div class="row">							
+                    <div class="col-lg-4">
+                      <b>Name: </b>{{i.name}}
+                    </div>
+                    <div class="col-lg-4">
+                      {% if i.get_rating() == [] %}
+                        <b>Rating: </b>No Rating
+                      {% else %}
+                        <b>Rating: </b>{{i.get_rating()}} 
+                      {% endif %}
+                    </div>
+                    <div class="col-lg-2">
+                      <a href="{{url_for('patient_provider_profile_book', username=current_user.name, centre_id=i.centreID, provider_id=provider.userID)}}" class="btn btn-primary">Book</a>
+                    </div>
+                  </div>
+                  <hr>
+                {% endfor %} 
+              </div>        
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+{% endblock %}
+</body>
+
+</header>

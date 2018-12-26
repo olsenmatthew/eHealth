@@ -1,0 +1,79 @@
+{% extends 'visitor/_header.html' %} 
+{% block head %} <title>Register</title> {% endblock %}
+{% block links %}
+<ul class="nav navbar-nav">
+    <li><a href="{{url_for('index')}}"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+  <li class="active"><a href="{{url_for('register')}}">Register</a></li>
+  <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</ul>
+{% endblock %}
+{% block body %}
+<div class="container">
+
+    <h1>Create your account</h1>
+    <h2><small>Please enter your details</small></h2>
+    <p>&nbsp;</p>
+        <form method="POST" role="form">
+            {% if error["name"] == "name_empty" %}
+            <div><p>Please enter first name!</p></div>
+            {% endif %}
+            <div>
+                <input name="name" type="text" class="form-control" placeholder="First Name">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["surname"] =="surname_empty" %}
+            <div><p>Please enter last name!</p></div>
+            {% endif %}
+            <div>
+                <input name="surname" type="text" class="form-control" placeholder="Last Name">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["phone"] == "phone_empty" %}
+            <div><p>Please enter phone number!</p></div>
+            {% endif %}
+            <div>
+                <input name="phone" type="number" class="form-control" placeholder="Phone Number">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["email"] == "email_empty" %}
+            <div><p>Please enter email address!</p></div>
+            {% endif %}
+            {% if error["user_exists"] == "user_exists" %}
+            <div><p>User already exists with email provided!</p></div>
+            {% endif %}
+            <div>
+                <input name="email" type="email" class="form-control" placeholder="Email Address">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["medicareNo"] == "medicareNo_empty" %}
+            <div><p>Please enter Medicare number!</p></div>
+            {% endif %}
+            <div>
+                <input name="medicareNo" type="number" class="form-control" placeholder="Medicare Number">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["pass1"] == "pass1_empty" %}
+            <div><p>Please enter password!</p></div>
+            {% endif %}
+            <div>
+                <input name="pass1" type="password" class="form-control" placeholder="Password">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["pass2"] == "pass2_empty" %}
+            <div><p>Please confirm password!</p></div>
+            {% endif %}
+            <div>
+                <input name="pass2" type="password" class="form-control" placeholder="Confirm Password">
+            </div>
+            <p>&nbsp;</p>
+            {% if error["pass_match"] == "pass_match" %}
+            <div><p>Passwords did not match!</p></div>
+            {% endif %}
+            <div><input type="submit" value="Register" class="btn" tabindex="7"></div>
+            <p>&nbsp;</p>
+            <div><a href="{{ url_for('login') }}">Already have an account? Sign In Here</a></div>
+        </form>
+    </div>
+{% endblock %}
